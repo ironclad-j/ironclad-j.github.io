@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#0b0b0b"><title>Ironclad Games</title><link rel="icon" href="/Ironclad-games/assets/icon.svg" type="image/svg+xml"><style>body{margin:0;background:#0b0b0b;color:#ccc;font:15px system-ui;min-height:100vh;display:grid;place-content:center}a{color:#eee}</style></head><body><p id="loading" role="status">Loading Ironclad Games...</p><noscript><a href="/Ironclad-games/">Open Ironclad Games</a></noscript>
+<script type="module">
+try {
+ const appUrl=new URL('/Ironclad-games/index.html',location.origin);
+ const response=await fetch(appUrl,{cache:'no-cache'});
+ if(!response.ok)throw new Error('The arcade returned HTTP '+response.status);
+ const page=new DOMParser().parseFromString(await response.text(),'text/html');
+ if(!page.getElementById('game-grid'))throw new Error('The arcade page was unavailable.');
+ const base=page.createElement('base');base.href=new URL('./',appUrl).href;page.head.prepend(base);
+ document.open();document.write('<!doctype html>'+page.documentElement.outerHTML);document.close();
+} catch {
+ document.getElementById('loading').textContent='Ironclad could not load. Please reload or use the direct link.';
+ const link=document.createElement('a');link.href='/Ironclad-games/';link.textContent='Open Ironclad Games';document.body.append(link);
+}
+</script></body></html>
